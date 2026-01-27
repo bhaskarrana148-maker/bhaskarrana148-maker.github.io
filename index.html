@@ -1,38 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Smart Daily Guide – Simple Tips for Better Life</title>
-<meta name="description" content="Daily life tips, habits, productivity and mindset articles to improve your life.">
-
-<!-- Google AdSense verification -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9304711110337397"
-crossorigin="anonymous"></script>
-
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartDailyGuide</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <!-- Header -->
+  <header>
+    <div class="logo-container">
+      <img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?w=100" alt="SmartDailyGuide Logo" class="logo">
+      <h1>SmartDailyGuide</h1>
+    </div>
+    <input type="text" id="searchInput" placeholder="Search articles...">
+    <p id="articleCount">Total Articles: 0</p>
+  </header>
 
-<header>
-  <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=200" alt="Smart Daily Guide Logo">
-  <h1>Smart Daily Guide</h1>
-  <p>Small habits. Big life change.</p>
-  <input type="text" id="searchInput" placeholder="Search articles...">
-</header>
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200" alt="Hero Image">
+    <div class="hero-text">
+      <h2>Explore Life-Changing Articles</h2>
+      <p>Discover tips, habits, and knowledge to boost your lifestyle, productivity, and health.</p>
+    </div>
+  </section>
 
-<main id="articles">
-</main>
+  <!-- Top Articles -->
+  <section id="top-articles">
+    <h2>Top Articles</h2>
+    <div id="topArticlesContainer" class="articles-container"></div>
+  </section>
 
-<footer>
-  <p>Contact: <a href="mailto:bhaskarrana148@gmail.com">bhaskarrana148@gmail.com</a></p>
-  <p>
-    <a href="privacy.html">Privacy Policy</a>
-  </p>
-</footer>
+  <!-- Other Articles -->
+  <section id="other-articles">
+    <h2>Other Articles</h2>
+    <div id="articlesContainer" class="articles-container"></div>
+  </section>
 
-<script src="script.js"></script>
+  <footer>
+    <p>Contact us: bhaskarrana148@gmail.com</p>
+    <p>&copy; 2026 SmartDailyGuide</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

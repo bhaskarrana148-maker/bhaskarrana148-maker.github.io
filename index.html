@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Daily Guide</title>
+<meta name="description" content="Smart Daily Guide shares simple money, health, productivity and technology tips for everyday life.">
+<style>
+body{font-family:Arial;margin:0;background:#f4f4f4}
+header{background:#1e88e5;color:white;padding:20px;text-align:center}
+input{width:100%;padding:12px;margin:15px 0}
+.article{background:white;padding:15px;margin:10px;border-radius:6px}
+a{text-decoration:none;color:#1e88e5;font-weight:bold}
+footer{background:#222;color:white;text-align:center;padding:15px}
+.reco{background:#e3f2fd;padding:10px;margin:10px;border-radius:6px}
+</style>
+
+<script>
+const articles = [
+"How to Save Money Every Month",
+"Healthy Morning Routine",
+"Improve Focus Naturally",
+"Best Free Learning Websites",
+"Simple Home Workouts",
+"Time Management Tips",
+"Online Earning for Beginners",
+"Reduce Stress Easily",
+"Improve Sleep Quality",
+"Smart Phone Usage Tips",
+"Budget Planning Basics",
+"Healthy Eating on Budget",
+"Avoid Procrastination",
+"Build Self Confidence",
+"Learn Faster Techniques",
+"Goal Setting Methods",
+"Digital Minimalism",
+"Productive Daily Routine",
+"Improve Communication Skills",
+"Passive Income Basics",
+"Daily Exercise Habits",
+"Money Saving Apps",
+"Meditation for Beginners",
+"Career Growth Advice",
+"Online Safety Tips",
+"Improve Writing Skills",
+"Reduce Screen Time",
+"Build Good Habits",
+"Stay Motivated Daily",
+"Smart Study Techniques"
+];
+
+function loadArticles(){
+let list=document.getElementById("list");
+articles.forEach((t,i)=>{
+list.innerHTML+=`
+<div class="article">
+<h3>${i+1}. ${t}</h3>
+<p>Simple and practical advice you can apply today.</p>
+</div>`;
+});
+}
+
+function search(){
+let q=document.getElementById("search").value.toLowerCase();
+document.querySelectorAll(".article").forEach(a=>{
+a.style.display=a.innerText.toLowerCase().includes(q)?"block":"none";
+});
+}
+
+window.onload=loadArticles;
+</script>
+</head>
+
+<body>
+
+<header>
+<h1>Smart Daily Guide</h1>
+<p>Simple tips for a smarter everyday life</p>
+</header>
+
+<div style="padding:20px">
+<input id="search" onkeyup="search()" placeholder="Search articles...">
+
+<div class="reco">
+<strong>Recommended:</strong>
+<ul>
+<li>How to Save Money Every Month</li>
+<li>Healthy Morning Routine</li>
+<li>Improve Focus Naturally</li>
+</ul>
+</div>
+
+<div id="list"></div>
+</div>
+
+<footer>
+<p>Contact: bhaskarrana148@gmail.com</p>
+<p>© 2026 Smart Daily Guide</p>
+</footer>
+
+</body>
+  </html>
+  

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Daily Guide</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRT0FHPJ5W"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZRT0FHPJ5W');</script>
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9304711110337397" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><a href="index.html" class="logo">Smart Daily Guide</a></header>
+    <main class="container" style="max-width: 800px; background: white; padding: 40px; margin-top: 30px; border-radius: 10px;">
+        <span id="art-cat" class="tag">Category</span>
+        <h1 id="art-title">Loading...</h1>
+        <div class="share-bar"><span style="font-weight:bold">Share:</span><div id="share-links" style="display:flex;gap:10px"></div></div>
+        <p id="art-views" style="color:#888;font-size:0.9rem"></p><hr>
+        <div id="art-content" style="font-size:1.2rem;line-height:1.8;margin-top:20px"></div>
+    </main>
+    <script src="script.js"></script>
+    <script>
+        window.onload=()=>{
+            const id=new URLSearchParams(window.location.search).get('id');
+            const art=articles.find(a=>a.id==id);
+            if(art){
+                document.getElementById('art-title').innerText=art.title;
+                document.getElementById('art-cat').innerText=art.category;
+                document.getElementById('art-views').innerText=art.views.toLocaleString()+" views";
+                document.getElementById('art-content').innerText=art.content;
+                const url=encodeURIComponent(window.location.href);
+                const text=encodeURIComponent("Check out: "+art.title);
+                document.getElementById('share-links').innerHTML=`<a href="https://api.whatsapp.com/send?text=${text}%20${url}" target="_blank" class="share-btn whatsapp">WhatsApp</a><a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" class="share-btn facebook">Facebook</a>`;
+                gtag('event','view_article',{'article_id':art.id, 'title': art.title});
+            }
+        };
+    </script>
+</body>
+</html>

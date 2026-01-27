@@ -3,112 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Daily Guide | Reading...</title>
+    <title>Reading Guide | Smart Daily Guide</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRT0FHPJ5W"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-ZRT0FHPJ5W');
-    </script>
-
     <link rel="stylesheet" href="style.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9304711110337397" crossorigin="anonymous"></script>
-
-    <style>
-        .reading-progress-bar { position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: var(--accent); z-index: 1000; }
-        .article-card { background: white; padding: 50px; border-radius: 20px; margin-top: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
-        .meta-info { display: flex; gap: 20px; color: #888; font-size: 0.9rem; margin-bottom: 20px; align-items: center; }
-        .content-area { font-size: 1.25rem; line-height: 2; color: #333; white-space: pre-wrap; margin: 30px 0; }
-        .body-img { width: 100%; border-radius: 15px; margin: 40px 0; transition: 0.3s; }
-        .body-img:hover { transform: scale(1.01); }
-        .share-sticky { display: flex; gap: 10px; margin-top: 50px; padding-top: 30px; border-top: 1px solid #eee; }
-    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRT0FHPJ5W"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZRT0FHPJ5W');</script>
 </head>
 <body>
-    <div class="reading-progress-bar" id="progressBar"></div>
-
+    <div id="progressBar"></div>
     <header>
         <a href="index.html" class="logo"><i class="fas fa-lightbulb"></i>Smart<span>Daily</span></a>
-        <nav><a href="index.html">Home</a><a href="about.html">About</a></nav>
     </header>
 
     <main class="container" style="max-width: 900px;">
-        <div class="article-card">
-            <span id="art-cat" class="tag" style="background: var(--bg); padding: 5px 12px; border-radius: 5px;">Category</span>
-            <h1 id="art-title" style="font-size: 3rem; margin: 20px 0; line-height: 1.2;">Loading...</h1>
+        <article style="background:white; padding:40px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.05); margin-top:30px;">
+            <span id="art-cat" class="tag">Category</span>
+            <h1 id="art-title" style="font-size:3rem; margin:15px 0;">Loading...</h1>
+            <p id="art-meta" style="color:#888; font-size:0.9rem; margin-bottom:20px;"></p>
             
-            <div class="meta-info">
-                <span id="art-views"><i class="far fa-eye"></i> 0</span>
-                <span><i class="far fa-clock"></i> 6 min read</span>
-                <span><i class="far fa-calendar-alt"></i> Jan 2026</span>
-            </div>
+            <img id="art-image-1" src="" class="hero-img" style="width:100%; border-radius:15px;">
+            <div id="art-content-top" style="font-size:1.25rem; line-height:2; margin:30px 0; white-space:pre-wrap;"></div>
+            
+            <img id="art-image-2" src="" class="hero-img" style="width:100%; border-radius:15px; margin:30px 0;">
+            <div id="art-content-bottom" style="font-size:1.25rem; line-height:2; margin:30px 0; white-space:pre-wrap;"></div>
 
-            <img id="art-image-1" src="" alt="Main Visual" class="hero-img">
+            <div style="border-top:1px solid #eee; padding-top:20px; display:flex; gap:15px;" id="share-links"></div>
+        </article>
 
-            <div id="art-content-top" class="content-area"></div>
-
-            <img id="art-image-2" src="" alt="Detailed Insight" class="body-img">
-
-            <div id="art-content-bottom" class="content-area"></div>
-
-            <div class="share-sticky">
-                <span style="font-weight: bold; align-self: center;">Share this Guide:</span>
-                <div id="share-links" style="display: flex; gap: 10px;"></div>
-            </div>
-        </div>
+        <section class="related-section">
+            <h3>More in this Category</h3>
+            <div id="related-grid" class="related-grid"></div>
+        </section>
     </main>
-
-    <footer style="margin-top: 60px;">
-        <p>© 2026 Smart Daily Guide | <a href="privacy.html" style="color: #d4a373;">Privacy Policy</a></p>
-    </footer>
 
     <script src="script.js"></script>
     <script>
-        // Progress Bar Logic
-        window.onscroll = function() {
+        window.onscroll = () => {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            document.getElementById("progressBar").style.width = scrolled + "%";
+            document.getElementById("progressBar").style.width = (winScroll / height) * 100 + "%";
         };
 
         window.onload = () => {
             const id = new URLSearchParams(window.location.search).get('id');
             const art = articles.find(a => a.id == id);
-            
             if(art) {
-                document.title = art.title + " | Smart Daily Guide";
                 document.getElementById('art-title').innerText = art.title;
                 document.getElementById('art-cat').innerText = art.category;
-                
-                // Set Unique Images from Script
                 document.getElementById('art-image-1').src = art.bodyImage1;
                 document.getElementById('art-image-2').src = art.bodyImage2;
+                document.getElementById('art-meta').innerHTML = `<i class="far fa-eye"></i> ${art.views.toLocaleString()} Readers &bull; <i class="far fa-clock"></i> 8 min read`;
                 
-                // Split Long Content
-                const halfway = Math.floor(art.content.length / 2);
-                document.getElementById('art-content-top').innerText = art.content.substring(0, halfway);
-                document.getElementById('art-content-bottom').innerText = art.content.substring(halfway);
-                
-                document.getElementById('art-views').innerHTML = `<i class="far fa-eye"></i> ${art.views.toLocaleString()} Readers`;
+                const half = Math.floor(art.content.length / 2);
+                document.getElementById('art-content-top').innerText = art.content.substring(0, half);
+                document.getElementById('art-content-bottom').innerText = art.content.substring(half);
 
-                const url = encodeURIComponent(window.location.href);
-                const text = encodeURIComponent("You should read this: " + art.title);
-
-                document.getElementById('share-links').innerHTML = `
-                    <a href="https://api.whatsapp.com/send?text=${text}%20${url}" target="_blank" style="background:#25D366; color:white; padding:10px 18px; border-radius:50px; text-decoration:none; font-size:0.9rem; font-weight:500;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" style="background:#1877F2; color:white; padding:10px 18px; border-radius:50px; text-decoration:none; font-size:0.9rem; font-weight:500;"><i class="fab fa-facebook-f"></i> Facebook</a>
-                `;
-
-                gtag('event', 'page_view', { 'article_title': art.title, 'category': art.category });
-            } else {
-                window.location.href = "index.html";
+                // Related Logic
+                const related = articles.filter(a => a.category === art.category && a.id !== art.id).sort(() => 0.5 - Math.random()).slice(0, 3);
+                document.getElementById('related-grid').innerHTML = related.map(rel => `
+                    <a href="article.html?id=${rel.id}" class="related-card">
+                        <img src="${rel.image}">
+                        <h4>${rel.title}</h4>
+                    </a>`).join('');
             }
         };
     </script>
 </body>
-                                                                                                                             </html>
+</html>

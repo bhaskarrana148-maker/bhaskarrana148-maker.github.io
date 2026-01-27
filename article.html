@@ -3,20 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Daily Guide</title>
+    <title>Article - Smart Daily Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRT0FHPJ5W"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZRT0FHPJ5W');</script>
     <link rel="stylesheet" href="style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9304711110337397" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header><a href="index.html" class="logo">Smart Daily Guide</a></header>
-    <main class="container" style="max-width: 800px; background: white; padding: 40px; margin-top: 30px; border-radius: 10px;">
-        <span id="art-cat" class="tag">Category</span>
-        <h1 id="art-title">Loading...</h1>
-        <div class="share-bar"><span style="font-weight:bold">Share:</span><div id="share-links" style="display:flex;gap:10px"></div></div>
-        <p id="art-views" style="color:#888;font-size:0.9rem"></p><hr>
-        <div id="art-content" style="font-size:1.2rem;line-height:1.8;margin-top:20px"></div>
+    <header>
+        <a href="index.html" class="logo"><i class="fas fa-lightbulb"></i>Smart<span>Daily</span></a>
+    </header>
+    <main class="container" style="max-width: 900px;">
+        <div style="background: white; padding: 40px; border-radius: 20px; margin-top: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <span id="art-cat" class="tag">Category</span>
+            <h1 id="art-title" style="font-size: 2.8rem; margin: 15px 0;">Loading...</h1>
+            <img id="art-image" src="" alt="Hero" class="hero-img">
+            
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <div id="share-links" style="display:flex; gap:12px;"></div>
+                <p id="art-views" style="color:#888; font-weight:bold;"></p>
+            </div>
+            <hr>
+            <div id="art-content" style="font-size: 1.3rem; line-height: 1.9; margin-top: 30px; color: #444;"></div>
+        </div>
     </main>
     <script src="script.js"></script>
     <script>
@@ -26,12 +36,18 @@
             if(art){
                 document.getElementById('art-title').innerText=art.title;
                 document.getElementById('art-cat').innerText=art.category;
-                document.getElementById('art-views').innerText=art.views.toLocaleString()+" views";
+                document.getElementById('art-image').src=art.image;
+                document.getElementById('art-views').innerText="👁 " + art.views.toLocaleString();
                 document.getElementById('art-content').innerText=art.content;
+                document.title = art.title;
+
                 const url=encodeURIComponent(window.location.href);
-                const text=encodeURIComponent("Check out: "+art.title);
-                document.getElementById('share-links').innerHTML=`<a href="https://api.whatsapp.com/send?text=${text}%20${url}" target="_blank" class="share-btn whatsapp">WhatsApp</a><a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" class="share-btn facebook">Facebook</a>`;
-                gtag('event','view_article',{'article_id':art.id, 'title': art.title});
+                const text=encodeURIComponent("Check this out: " + art.title);
+                document.getElementById('share-links').innerHTML=`
+                    <a href="https://api.whatsapp.com/send?text=${text}%20${url}" target="_blank" style="background:#25D366; color:white; padding:10px 20px; border-radius:50px; text-decoration:none; font-size:0.9rem;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" style="background:#1877F2; color:white; padding:10px 20px; border-radius:50px; text-decoration:none; font-size:0.9rem;"><i class="fab fa-facebook-f"></i> Facebook</a>
+                `;
+                gtag('event','view_article',{'article_id':art.id, 'article_title': art.title});
             }
         };
     </script>

@@ -1,15 +1,22 @@
-id: 1, title: "How Small Daily Habits Transform Your Life", desc: "Learn how tiny habits create massive life changes." },
-  { id: 2, title: "Morning Routine That Boosts Energy and Focus", desc: "Start your day with clarity and motivation." },
-  { id: 3, title: "How to Stop Procrastination for Good", desc: "Practical techniques to take action daily." },
-  { id: 4, title: "Time Management Techniques That Actually Work", desc: "Control your time without stress." },
-  { id: 5, title: "Building Self-Discipline in Everyday Life", desc: "Train your mind to stay consistent." },
-
-  // 🔽 AUTO-GENERATED ARTICLES (6–300)
-  ...Array.from({ length: 295 }, (_, i) => ({
-    id: i + 6,
-    title: `Smart Life Lesson #${i + 6}`,
-    desc: "Practical advice to improve daily life, mindset, and productivity."
-  }))
+const articleData = [
+  {
+    id: 1,
+    title: "How Small Daily Habits Can Change Your Life",
+    desc: "Simple daily actions that slowly but surely transform your mindset and lifestyle.",
+    img: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?w=800"
+  },
+  {
+    id: 2,
+    title: "Morning Routine That Increases Focus and Energy",
+    desc: "A realistic morning routine anyone can follow for better productivity.",
+    img: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800"
+  },
+  {
+    id: 3,
+    title: "How to Stay Motivated Even When Life Feels Hard",
+    desc: "Practical mindset shifts to stay strong during tough days.",
+    img: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800"
+  }
 ];
 
 const container = document.getElementById("articles");
@@ -23,7 +30,7 @@ function renderArticles(filter = "") {
       const div = document.createElement("div");
       div.className = "article-card";
       div.innerHTML = `
-        <img src="images/homepage-img1.jpg" alt="Smart Daily Guide">
+        <img src="${a.img}" alt="${a.title}">
         <h2><a href="articles/article${a.id}.html">${a.title}</a></h2>
         <p>${a.desc}</p>
       `;
@@ -36,4 +43,3 @@ searchInput.addEventListener("input", e => {
 });
 
 renderArticles();
-      

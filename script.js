@@ -1,11 +1,9 @@
-const searchInput = document.getElementById("searchInput");
-const articles = document.querySelectorAll("article");
+const input = document.getElementById("searchInput");
+const articles = document.querySelectorAll(".article-card");
 
-searchInput.addEventListener("input", () => {
-  const term = searchInput.value.toLowerCase();
-  articles.forEach(article => {
-    article.style.display = article.innerText.toLowerCase().includes(term)
-      ? "block"
-      : "none";
+input.addEventListener("input", () => {
+  const value = input.value.toLowerCase();
+  articles.forEach(a => {
+    a.style.display = a.innerText.toLowerCase().includes(value) ? "flex" : "none";
   });
 });

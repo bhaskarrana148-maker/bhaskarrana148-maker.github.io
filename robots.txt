@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bhaskarrana148-maker.github.io/sitemap.xml

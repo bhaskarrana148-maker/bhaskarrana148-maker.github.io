@@ -14,19 +14,19 @@
 </head>
 <body>
     <header>
-        <a href="index.html" class="logo">
-            <i class="fas fa-lightbulb" style="color: var(--accent); margin-right: 8px;"></i>Smart<span>Daily</span>
-        </a>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="contact.html" class="btn-contact">Contact</a>
-        </nav>
+        <a href="index.html" class="logo"><i class="fas fa-lightbulb"></i>Smart<span>Daily</span></a>
+        <nav><a href="index.html">Home</a><a href="about.html">About</a><a href="contact.html" class="btn-contact">Contact</a></nav>
     </header>
 
     <div class="hero">
         <h1>Smart Daily Guide</h1>
         <p>Expert insights on Tech, Finance, and Lifestyle.</p>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search 300+ guides..." onkeyup="if(event.key==='Enter')searchArticles()">
+            <button onclick="searchArticles()"><i class="fas fa-search"></i></button>
+        </div>
+
         <div class="stats-box">
             <div class="stat"><span id="total-count">0</span><label>Articles</label></div>
             <div class="stat"><span>30K+</span><label>Readers</label></div>
@@ -34,19 +34,17 @@
     </div>
 
     <div class="container">
-        <section>
+        <section id="trending-section">
             <h2 class="section-heading">🔥 Trending Now</h2>
             <div class="grid" id="top-articles"></div>
         </section>
         <section style="margin-top: 50px;">
-            <h2 class="section-heading">📚 Latest Guides</h2>
+            <h2 class="section-heading" id="archive-title">📚 Latest Guides</h2>
             <div class="grid" id="archive-articles"></div>
         </section>
     </div>
 
-    <footer>
-        <p>© 2026 Smart Daily Guide | <a href="privacy.html" style="color:#d4a373">Privacy Policy</a></p>
-    </footer>
+    <footer><p>© 2026 Smart Daily Guide | <a href="privacy.html" style="color:#d4a373">Privacy Policy</a></p></footer>
     <script src="script.js"></script>
 </body>
     </html>

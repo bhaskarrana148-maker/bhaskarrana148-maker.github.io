@@ -1,5 +1,4 @@
-const articleData = [
-  { id: 1, title: "How Small Daily Habits Transform Your Life", desc: "Learn how tiny habits create massive life changes." },
+id: 1, title: "How Small Daily Habits Transform Your Life", desc: "Learn how tiny habits create massive life changes." },
   { id: 2, title: "Morning Routine That Boosts Energy and Focus", desc: "Start your day with clarity and motivation." },
   { id: 3, title: "How to Stop Procrastination for Good", desc: "Practical techniques to take action daily." },
   { id: 4, title: "Time Management Techniques That Actually Work", desc: "Control your time without stress." },

@@ -14,48 +14,38 @@
         <a href="index.html" class="logo"><i class="fas fa-lightbulb"></i>Smart<span>Daily</span></a>
         <button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i></button>
     </header>
-    <main class="container" style="max-width: 900px;">
-        <article style="background:var(--card-bg); padding:30px; border-radius:30px; margin-top:30px;">
-            <span id="art-cat" class="tag">Category</span>
-            <h1 id="art-title" style="margin:15px 0;">Loading Article...</h1>
-            <img id="art-img1" src="" style="width:100%; border-radius:20px; margin-bottom:20px;">
-            <div id="art-body" class="article-body"></div>
-            <img id="art-img2" src="" style="width:100%; border-radius:20px; margin:30px 0;">
+    <main class="container">
+        <article style="background:var(--card-bg); padding:40px; border-radius:25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <div id="art-body" class="article-content">
+                <h1 id="art-title" style="text-align:center; font-family:'Playfair Display', serif; margin-bottom:40px;">Loading Guide...</h1>
+                <div id="main-content"></div>
+            </div>
         </article>
 
-        <section style="margin-top:50px; border-top: 1px solid #ddd; padding-top:30px;">
-            <h2 class="section-heading">📚 More from this Category</h2>
+        <section style="margin-top:60px;">
+            <h2 style="font-family:'Playfair Display', serif;">📚 Related Mastery Guides</h2>
             <div class="grid" id="related-grid"></div>
         </section>
     </main>
-
     <script src="script.js"></script>
     <script>
         window.onload = () => {
             const id = new URLSearchParams(window.location.search).get('id');
             const art = articles.find(a => a.id == id);
             if(art) {
-                document.title = art.title;
+                document.title = art.title + " | Smart Daily";
                 document.getElementById('art-title').innerText = art.title;
-                document.getElementById('art-cat').innerText = art.category;
-                document.getElementById('art-img1').src = art.bodyImage1;
-                document.getElementById('art-img2').src = art.bodyImage2;
-                document.getElementById('art-body').innerHTML = art.content;
+                document.getElementById('main-content').innerHTML = art.content;
                 
-                // Show 3 Related Articles
                 const related = articles.filter(a => a.category === art.category && a.id != art.id).slice(0, 3);
-                const relGrid = document.getElementById('related-grid');
-                relGrid.innerHTML = related.map(r => `
-                    <a href="article.html?id=${r.id}" class="card">
-                        <img src="${r.image}">
-                        <div class="card-body"><h3>${r.title}</h3></div>
-                    </a>`).join('');
+                renderGrid(related, "related-grid");
             }
         };
         window.onscroll = () => {
-            let s = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-            document.getElementById("progressBar").style.width = s + "%";
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById("progressBar").style.width = (winScroll / height) * 100 + "%";
         };
     </script>
 </body>
-    </html>
+</html>

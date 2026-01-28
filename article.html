@@ -14,16 +14,21 @@
         <a href="index.html" class="logo"><i class="fas fa-lightbulb"></i>Smart<span>Daily</span></a>
         <button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i></button>
     </header>
-    <main class="container" style="max-width: 800px;">
-        <article style="background:var(--card-bg); padding:40px; border-radius:30px; margin-top:40px;">
+    <main class="container" style="max-width: 900px;">
+        <article style="background:var(--card-bg); padding:30px; border-radius:30px; margin-top:30px;">
             <span id="art-cat" class="tag">Category</span>
-            <h1 id="art-title">Loading...</h1>
+            <h1 id="art-title" style="margin:15px 0;">Loading Article...</h1>
             <img id="art-img1" src="" style="width:100%; border-radius:20px; margin-bottom:20px;">
-            <div id="art-content1" style="font-size:1.2rem; line-height:1.8;"></div>
+            <div id="art-body" class="article-body"></div>
             <img id="art-img2" src="" style="width:100%; border-radius:20px; margin:30px 0;">
-            <div id="art-content2" style="font-size:1.2rem; line-height:1.8;"></div>
         </article>
+
+        <section style="margin-top:50px; border-top: 1px solid #ddd; padding-top:30px;">
+            <h2 class="section-heading">📚 More from this Category</h2>
+            <div class="grid" id="related-grid"></div>
+        </section>
     </main>
+
     <script src="script.js"></script>
     <script>
         window.onload = () => {
@@ -35,8 +40,16 @@
                 document.getElementById('art-cat').innerText = art.category;
                 document.getElementById('art-img1').src = art.bodyImage1;
                 document.getElementById('art-img2').src = art.bodyImage2;
-                document.getElementById('art-content1').innerText = art.content;
-                document.getElementById('art-content2').innerText = art.content;
+                document.getElementById('art-body').innerHTML = art.content;
+                
+                // Show 3 Related Articles
+                const related = articles.filter(a => a.category === art.category && a.id != art.id).slice(0, 3);
+                const relGrid = document.getElementById('related-grid');
+                relGrid.innerHTML = related.map(r => `
+                    <a href="article.html?id=${r.id}" class="card">
+                        <img src="${r.image}">
+                        <div class="card-body"><h3>${r.title}</h3></div>
+                    </a>`).join('');
             }
         };
         window.onscroll = () => {
@@ -45,4 +58,4 @@
         };
     </script>
 </body>
-</html>
+    </html>

@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Allow: /script.js
+Allow: /style.css
 
+# Point Google directly to your map
 Sitemap: https://bhaskarrana148-maker.github.io/sitemap.xml

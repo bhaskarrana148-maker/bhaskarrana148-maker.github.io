@@ -3,69 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reading Guide | Smart Daily Guide</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Article | Smart Daily</title>
+    <link rel="icon" type="image/png" href="https://img.icons8.com/fluency/48/light-bulb.png">
     <link rel="stylesheet" href="style.css">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRT0FHPJ5W"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZRT0FHPJ5W');</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="light-theme">
     <div id="progressBar"></div>
     <header>
         <a href="index.html" class="logo"><i class="fas fa-lightbulb"></i>Smart<span>Daily</span></a>
+        <button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i></button>
     </header>
-
-    <main class="container" style="max-width: 900px;">
-        <article style="background:white; padding:40px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.05); margin-top:30px;">
+    <main class="container" style="max-width: 800px;">
+        <article style="background:var(--card-bg); padding:40px; border-radius:30px; margin-top:40px;">
             <span id="art-cat" class="tag">Category</span>
-            <h1 id="art-title" style="font-size:3rem; margin:15px 0;">Loading...</h1>
-            <p id="art-meta" style="color:#888; font-size:0.9rem; margin-bottom:20px;"></p>
-            
-            <img id="art-image-1" src="" class="hero-img" style="width:100%; border-radius:15px;">
-            <div id="art-content-top" style="font-size:1.25rem; line-height:2; margin:30px 0; white-space:pre-wrap;"></div>
-            
-            <img id="art-image-2" src="" class="hero-img" style="width:100%; border-radius:15px; margin:30px 0;">
-            <div id="art-content-bottom" style="font-size:1.25rem; line-height:2; margin:30px 0; white-space:pre-wrap;"></div>
-
-            <div style="border-top:1px solid #eee; padding-top:20px; display:flex; gap:15px;" id="share-links"></div>
+            <h1 id="art-title">Loading...</h1>
+            <img id="art-img1" src="" style="width:100%; border-radius:20px; margin-bottom:20px;">
+            <div id="art-content1" style="font-size:1.2rem; line-height:1.8;"></div>
+            <img id="art-img2" src="" style="width:100%; border-radius:20px; margin:30px 0;">
+            <div id="art-content2" style="font-size:1.2rem; line-height:1.8;"></div>
         </article>
-
-        <section class="related-section">
-            <h3>More in this Category</h3>
-            <div id="related-grid" class="related-grid"></div>
-        </section>
     </main>
-
     <script src="script.js"></script>
     <script>
-        window.onscroll = () => {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            document.getElementById("progressBar").style.width = (winScroll / height) * 100 + "%";
-        };
-
         window.onload = () => {
             const id = new URLSearchParams(window.location.search).get('id');
             const art = articles.find(a => a.id == id);
             if(art) {
+                document.title = art.title;
                 document.getElementById('art-title').innerText = art.title;
                 document.getElementById('art-cat').innerText = art.category;
-                document.getElementById('art-image-1').src = art.bodyImage1;
-                document.getElementById('art-image-2').src = art.bodyImage2;
-                document.getElementById('art-meta').innerHTML = `<i class="far fa-eye"></i> ${art.views.toLocaleString()} Readers &bull; <i class="far fa-clock"></i> 8 min read`;
-                
-                const half = Math.floor(art.content.length / 2);
-                document.getElementById('art-content-top').innerText = art.content.substring(0, half);
-                document.getElementById('art-content-bottom').innerText = art.content.substring(half);
-
-                // Related Logic
-                const related = articles.filter(a => a.category === art.category && a.id !== art.id).sort(() => 0.5 - Math.random()).slice(0, 3);
-                document.getElementById('related-grid').innerHTML = related.map(rel => `
-                    <a href="article.html?id=${rel.id}" class="related-card">
-                        <img src="${rel.image}">
-                        <h4>${rel.title}</h4>
-                    </a>`).join('');
+                document.getElementById('art-img1').src = art.bodyImage1;
+                document.getElementById('art-img2').src = art.bodyImage2;
+                document.getElementById('art-content1').innerText = art.content;
+                document.getElementById('art-content2').innerText = art.content;
             }
+        };
+        window.onscroll = () => {
+            let s = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById("progressBar").style.width = s + "%";
         };
     </script>
 </body>

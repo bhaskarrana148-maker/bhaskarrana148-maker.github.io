@@ -3,48 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Daily Guide | Premium Knowledge Hub</title>
+    <title>Smart Daily | Premium Knowledge Hub</title>
+    
+    <link rel="icon" type="image/png" href="https://img.icons8.com/fluency/48/light-bulb.png">
+    <link rel="apple-touch-icon" href="https://img.icons8.com/fluency/48/light-bulb.png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9304711110337397" crossorigin="anonymous"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRT0FHPJ5W"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZRT0FHPJ5W');</script>
-    <meta name="google-site-verification" content="WOBNrxoX2ewteeoroCyOz8UL5F9naHXh89_VI09aQdY" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9304711110337397" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="light-theme">
     <header>
         <a href="index.html" class="logo"><i class="fas fa-lightbulb"></i>Smart<span>Daily</span></a>
-        <nav><a href="index.html">Home</a><a href="about.html">About</a><a href="contact.html" class="btn-contact">Contact</a></nav>
+        <nav>
+            <a href="index.html">Home</a>
+            <button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i></button>
+        </nav>
     </header>
 
     <div class="hero">
-        <h1>Smart Daily Guide</h1>
-        <p>Expert insights on Tech, Finance, and Lifestyle.</p>
+        <span class="badge">Insight 2026</span>
+        <h1>Master Your Daily Life</h1>
+        <p>300+ Expert Guides on Technology, Finance, and Wellness.</p>
         
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Search 300+ guides..." onkeyup="if(event.key==='Enter')searchArticles()">
-            <button onclick="searchArticles()"><i class="fas fa-search"></i></button>
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search for a topic..." oninput="showRecommendations()" autocomplete="off">
+                <button onclick="searchArticles()"><i class="fas fa-search"></i></button>
+            </div>
+            <div id="recommendations" class="recommendations-list"></div>
         </div>
 
-        <div class="stats-box">
-            <div class="stat"><span id="total-count">0</span><label>Articles</label></div>
-            <div class="stat"><span>30K+</span><label>Readers</label></div>
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterByCategory('All')">All</button>
+            <button class="filter-btn" onclick="filterByCategory('Technology')">Technology</button>
+            <button class="filter-btn" onclick="filterByCategory('Finance')">Finance</button>
+            <button class="filter-btn" onclick="filterByCategory('Lifestyle')">Lifestyle</button>
+            <button class="filter-btn" onclick="filterByCategory('Health')">Health</button>
         </div>
     </div>
 
     <div class="container">
-        <section id="trending-section">
+        <section id="top-section">
             <h2 class="section-heading">🔥 Trending Now</h2>
             <div class="grid" id="top-articles"></div>
         </section>
-        <section style="margin-top: 50px;">
-            <h2 class="section-heading" id="archive-title">📚 Latest Guides</h2>
+        
+        <section style="margin-top: 60px;">
+            <h2 class="section-heading" id="archive-title">📚 Explore Library</h2>
             <div class="grid" id="archive-articles"></div>
         </section>
     </div>
 
-    <footer><p>© 2026 Smart Daily Guide | <a href="privacy.html" style="color:#d4a373">Privacy Policy</a></p></footer>
+    <footer>
+        <p>© 2026 Smart Daily Guide | <a href="privacy.html" style="color:var(--accent)">Privacy Policy</a></p>
+    </footer>
+
     <script src="script.js"></script>
 </body>
-    </html>
+</html>

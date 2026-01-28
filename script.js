@@ -1,59 +1,73 @@
-const cats = ["Technology", "Finance", "Lifestyle", "Health"];
+const categories = ["Technology", "Finance", "Lifestyle", "Health"];
+const tech = ["AI Strategy", "Quantum Future", "Cyber Shield", "Web 3.0", "Cloud Flow"];
+const fin = ["Stock Mastery", "Crypto Growth", "Real Estate", "Passive Income", "Wealth Prep"];
+const life = ["Productivity", "Minimalism", "Digital Nomad", "Time Hacks", "Travel Luxe"];
+const heal = ["Mental Flow", "Biohacking", "Nutrition Hub", "Sleep Science", "Fitness Pro"];
+
 const articles = [];
-
-// Content blocks for long articles
-const blocks = [
-    "In 2026, the digital landscape is shifting faster than ever. Understanding the core drivers behind these changes is essential for anyone looking to stay competitive. From AI advancements to shifts in global markets, the data points to a more decentralized and automated future.",
-    "Mental resilience and physical health are becoming the primary currencies of success. As we integrate more technology into our lives, the ability to disconnect and focus on biological wellness is a high-performance trait. Science shows that small, consistent habits lead to exponential gains over time.",
-    "Financial systems are undergoing a massive transformation. Traditional banking is merging with decentralized finance, creating opportunities for passive income that didn't exist a decade ago. Mastering your personal economy requires a mix of technical knowledge and psychological discipline."
-];
-
 for (let i = 1; i <= 300; i++) {
-    const category = cats[i % 4];
+    const cat = categories[i % 4];
+    const pool = cat === "Technology" ? tech : cat === "Finance" ? fin : cat === "Lifestyle" ? life : heal;
+    const title = `${pool[i % 5]} Mastery: Guide ${i}`;
     articles.push({
-        id: i,
-        title: `${category} Strategy: Guide #${i} for 2026`,
-        category: category,
-        image: `https://picsum.photos/seed/${i+100}/800/500`,
-        bodyImage1: `https://picsum.photos/seed/${i+500}/800/450`,
-        bodyImage2: `https://picsum.photos/seed/${i+900}/800/450`,
-        views: Math.floor(Math.random() * 20000) + 1000,
-        content: Array(10).fill(blocks[i % 3]).join("\n\n") // Generates ~1000 words
+        id: i, title: title, category: cat,
+        image: `https://picsum.photos/seed/${i + 200}/800/500`,
+        bodyImage1: `https://picsum.photos/seed/${i + 600}/800/450`,
+        bodyImage2: `https://picsum.photos/seed/${i + 800}/800/450`,
+        views: Math.floor(Math.random() * 20000) + 5000,
+        content: `Master ${title} in 2026. This guide explores core principles, strategic advantages, and future trends of ${cat}.`
     });
 }
 
+const themeBtn = document.getElementById('theme-toggle');
+themeBtn?.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme');
+    const isDark = document.body.classList.contains('dark-theme');
+    themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+});
+
+function showRecommendations() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    const box = document.getElementById('recommendations');
+    if (q.length < 2) { box.style.display = 'none'; return; }
+    const matches = articles.filter(a => a.title.toLowerCase().includes(q)).slice(0, 5);
+    box.innerHTML = matches.map(m => `<div class="rec-item" onclick="selectArticle('${m.title}')">${m.title}</div>`).join('');
+    box.style.display = matches.length ? 'block' : 'none';
+}
+
+function selectArticle(t) {
+    document.getElementById('searchInput').value = t;
+    document.getElementById('recommendations').style.display = 'none';
+    searchArticles();
+}
+
+function searchArticles() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    renderGrid(articles.filter(a => a.title.toLowerCase().includes(q)));
+}
+
+function filterByCategory(cat) {
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.toggle('active', btn.innerText === cat));
+    renderGrid(cat === 'All' ? articles : articles.filter(a => a.category === cat));
+    document.getElementById('top-section').style.display = cat === 'All' ? 'block' : 'none';
+}
+
+function renderGrid(data) {
+    document.getElementById("archive-articles").innerHTML = data.slice(0, 15).map(createCard).join('');
+}
+
 function createCard(art) {
-    return `
-    <a href="article.html?id=${art.id}" class="card">
-        <div class="card-img-container"><img src="${art.image}" class="card-img"></div>
+    return `<a href="article.html?id=${art.id}" class="card">
+        <img src="${art.image}" loading="lazy">
         <div class="card-body">
             <span class="tag">${art.category}</span>
-            <h3 style="margin:10px 0">${art.title}</h3>
-            <div style="font-size:0.8rem;color:#888">👁 ${art.views.toLocaleString()} Readers</div>
+            <h3 style="margin:10px 0; font-size:1.1rem;">${art.title}</h3>
         </div>
     </a>`;
 }
 
-function searchArticles() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    const results = articles.filter(a => a.title.toLowerCase().includes(query) || a.category.toLowerCase().includes(query));
-    const archGrid = document.getElementById("archive-articles");
-    const archTitle = document.getElementById("archive-title");
-    
-    if(results.length > 0) {
-        archTitle.innerText = `Search Results (${results.length})`;
-        archGrid.innerHTML = results.slice(0, 15).map(createCard).join('');
-        archGrid.scrollIntoView({ behavior: 'smooth' });
-    } else {
-        archGrid.innerHTML = "<p style='grid-column:1/-1;text-align:center;padding:50px'>No guides match your search.</p>";
-    }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-    if(document.getElementById("total-count")) document.getElementById("total-count").innerText = articles.length;
-    const sorted = [...articles].sort((a, b) => b.views - a.views);
-    const topGrid = document.getElementById("top-articles");
-    const archGrid = document.getElementById("archive-articles");
-    if(topGrid) topGrid.innerHTML = sorted.slice(0, 3).map(createCard).join('');
-    if(archGrid) archGrid.innerHTML = sorted.slice(3, 15).map(createCard).join('');
+    const sorted = [...articles].sort((a,b) => b.views - a.views);
+    document.getElementById("top-articles").innerHTML = sorted.slice(0, 3).map(createCard).join('');
+    renderGrid(articles);
 });
